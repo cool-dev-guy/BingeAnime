@@ -1,0 +1,123 @@
+
+<html>
+<head>
+    <title>BingeAnime</title>
+  	<meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/media-chrome@1/+esm"></script>
+    <link rel="stylesheet" href="style.css"></link>
+</head>
+  <ul>
+    <li><a href="#home">AnimeWatch</a></li>
+    <li style="float:right"><a class="active" href="#about">Q</a></li>
+  </ul>
+<body>
+  
+    <media-controller>
+        <video id="video" width="100%" slot="media">
+            <!-- Remove the <track> element for now -->
+        </video>
+        <section>
+            <media-seek-backward-button></media-seek-backward-button>
+            <media-play-button></media-play-button>
+            <media-seek-forward-button></media-seek-forward-button>
+        </section>
+        <media-control-bar>
+            <media-mute-button class="mute"></media-mute-button>
+            <media-volume-range class="vol"></media-volume-range>
+            <media-time-display></media-time-display>
+            <media-time-range></media-time-range>
+            <media-fullscreen-button></media-fullscreen-button>
+        </media-control-bar>
+    </media-controller>
+    <div class="details">
+      <center>
+        <span style="font-size:0.8rem">Currently watching</span><br>
+        <label id="Episode_num" style="color:#cce96b;font-size:0.9rem">Episode 398</label><br>
+        <span style="font-size:0.8rem">If current server dosent work,please choose another server.</span>
+      </center>
+    </div>
+    <div class="servers">
+      <span style="font-size:0.9rem;">Servers</span>
+      <div class="servers-container">
+      <button onclick=server_change("gogocdn")>gogocdn</button> <button onclick=server_change("streamsb")>streamsb</button> <button onclick=server_change("vidstreaming")>vidstreaming</button>
+      </div>
+    </div>
+  <div class="episodes">
+    <div class="episodes-selector"><span>List of episodes</span><input value="" type="text" placeholder="Enter number"/></div>
+    <div class="episodes-container">
+      <div onclick="changeEpisode(this.value)" vlaue=1 type="1">Episode placeholder</div>
+      <div onclick="changeEpisode(this.value)" vlaue=1 type="0">Episode placeholder</div>
+      <div onclick="changeEpisode(this.value)" vlaue=1 type="1">Episode placeholder</div>
+      <div onclick="changeEpisode(this.value)" vlaue=1 type="0">Episode placeholder</div>
+      <div onclick="changeEpisode(this.value)" vlaue=1 type="1">Episode placeholder</div>
+      <div onclick="changeEpisode(this.value)" vlaue=1 type="0">Episode placeholder</div>
+      <div onclick="changeEpisode(this.value)" vlaue=1 type="1">Episode placeholder</div>
+      <div onclick="changeEpisode(this.value)" vlaue=1 type="0">Episode placeholder</div>
+      <div onclick="changeEpisode(this.value)" vlaue=1 type="1">Episode placeholder</div>
+      <div onclick="changeEpisode(this.value)" vlaue=1 type="0">Episode placeholder</div>
+      <div onclick="changeEpisode(this.value)" vlaue=1 type="1">Episode placeholder</div>
+      <div onclick="changeEpisode(this.value)" vlaue=1 type="0">Episode placeholder</div>
+      <div onclick="changeEpisode(this.value)" vlaue=1 type="1">Episode placeholder</div>
+      <div onclick="changeEpisode(this.value)" vlaue=1 type="0">Episode placeholder</div>
+    </div>
+  </div>
+
+    <script>
+        var playerx = null;
+        function server_change(server){
+          if (playerx){
+            playerx.server = server;
+            playerx.getAnimeFile("spy-x-family-episode-1");
+          }
+        }
+        const video = document.getElementById('video');
+
+        class PlayerManager {
+            constructor(elem) {
+                this.elem = elem;
+                this.hls = new Hls();
+              
+                this.server = 'gogocdn';
+                this.state = 'IDLE';
+                this.streams = {"default": "", "backup": ""};
+                this.current_format = 'default';
+            }
+
+            getAnimeFile(ep_id) {
+                const url = `https://api.consumet.org/anime/gogoanime/watch/${ep_id}?server=${this.server}`;
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", url, true);
+
+                xhr.onload = () => {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        const responseData = JSON.parse(xhr.responseText);
+                        console.log(responseData.sources[responseData.sources.length - 1].url);
+                        this.state = 'SOURCE RECEIVED';
+                        this.streams['default'] = responseData.sources[responseData.sources.length - 2].url;
+                        this.streams['backup'] = responseData.sources[responseData.sources.length - 1].url;
+
+                        this.playAnimeFile();
+                    } else {
+                        this.state = 'ERROR';
+                        console.error("HTTP error! Status:", xhr.status);
+                    }
+                };
+
+                xhr.send();
+            }
+
+            playAnimeFile() {
+                this.state = 'FILE LOADED';
+                this.hls.loadSource(this.streams[this.current_format]);
+                this.hls.attachMedia(this.elem);
+            }
+        }
+        playerx = new PlayerManager(video);
+        playerx.getAnimeFile("spy-x-family-episode-1");
+
+
+    </script>
+</body>
+</html>
