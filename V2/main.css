@@ -94,7 +94,7 @@ media-player{
   border-radius:5px;
   margin:10px 0px 10px 0px;
 }
-
+/* 
 @media screen and (min-width: 700px) {
   main{
     display:none;
@@ -103,4 +103,4 @@ media-player{
     color:#DDD;
     display:block;
   }
-}
+} */
