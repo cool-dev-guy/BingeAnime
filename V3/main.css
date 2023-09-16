@@ -213,7 +213,6 @@ media-player{
   border:none;
 }
 .episodes-selector span{
-  font-size:0.9rem;
   line-height:30px;
 }
 .episodes-container{
@@ -228,7 +227,6 @@ media-player{
   grid-template-rows:repeat(auto);
 }
 .episodes-container div{
-  font-size:0.9rem;
   color:#888;
   text-align:left;
   padding:10px;
