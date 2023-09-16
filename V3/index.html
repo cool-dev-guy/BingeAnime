@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Binge Anime</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vidstack/styles/defaults.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vidstack/styles/community-skin/video.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/vidstack/dist/cdn/prod.js"></script>
+    <link rel="stylesheet" href="main.css"/>
+</head>
+<body name="body">
+    <header>
+        <nav>
+            <button onclick="openTab('app-home')">Home</button>
+            <button onclick="openTab('app-search')"><i class="fa-solid fa-magnifying-glass" style="color: #c9e962;"></i></button>
+            <button class="active" onclick="openTab('app-player')"><i class="fa-solid fa-tv" style="color: #c9e962;"> Player</i></button>
+        </nav>
+    </header>
+    <main id="main">
+        <section class="tab" id="app-player">
+            <section class="app-player-widget">
+                <media-player
+                    id="player"
+                    aspect-ratio="16/9"
+                    src="https://www002.vipanicdn.net/streamhls/0789fd4f049c3ca2a49b860ea5d1f456/ep.1.1677591537.m3u8"
+                    poster="https://media-files.vidstack.io/poster.png"
+                    crossorigin
+                >
+                    <media-outlet>
+                      <media-thumbnail time="50"></media-thumbnail>
+                    </media-outlet>
+                    <media-community-skin></media-community-skin>
+                </media-player>
+                <div class="app-player-widget-addons addons-controls">
+                    <span class="player-addons">Episode 298</span>
+                    <span class="player-addons"><i class="fa-solid fa-forward-step fa-rotate-180" style="color: #c9e962;"></i></span>
+                    <span class="player-addons"><i class="fa-solid fa-forward-step" style="color: #c9e962;"></i></span> 
+                    <span class="player-addons">+</span> 
+                </div>
+                <section class="app-player-details">
+                  <div class="details">
+                  <center>
+                    <span style="font-size:0.8rem">
+                      If current server dosent work,please choose another server.
+                    </span>
+                  </center>
+                </div>
+                  <div class="servers">
+                    <span style="font-size:0.9rem;">Servers</span>
+                    <div class="servers-container">
+                      <span>SUB : </span>
+                      <span>
+                        <button onclick=server_change("gogocdn") class="active">gogocdn</button>
+                        <button onclick=server_change("streamsb")>streamsb</button>
+                        <button onclick=server_change("vidstreaming")>vidstreaming</button>
+                      </span>
+                    </div>
+                </div>
+                </section>
+            </section>
+            <section class="app-player-other">
+              <div class="episodes">
+                <div class="episodes-selector">
+                  <span>List of episodes</span>
+                  <input value="" type="text" placeholder="Enter number"/>
+                </div>
+                <div class="episodes-container">
+                  <div onclick="changeEpisode(this.value)" vlaue=1 type="1">Episode placeholder</div>
+                  <div onclick="changeEpisode(this.value)" vlaue=1 type="0">Episode placeholder</div>
+                  <div onclick="changeEpisode(this.value)" vlaue=1 type="1">Episode placeholder</div>
+                  <div onclick="changeEpisode(this.value)" vlaue=1 type="0">Episode placeholder</div>
+                  <div onclick="changeEpisode(this.value)" vlaue=1 type="1">Episode placeholder</div>
+                  <div onclick="changeEpisode(this.value)" vlaue=1 type="0">Episode placeholder</div>
+                  <div onclick="changeEpisode(this.value)" vlaue=1 type="1">Episode placeholder</div>
+                  <div onclick="changeEpisode(this.value)" vlaue=1 type="0">Episode placeholder</div>
+                  <div onclick="changeEpisode(this.value)" vlaue=1 type="1">Episode placeholder</div>
+                  <div onclick="changeEpisode(this.value)" vlaue=1 type="0">Episode placeholder</div>
+                  <div onclick="changeEpisode(this.value)" vlaue=1 type="1">Episode placeholder</div>
+                  <div onclick="changeEpisode(this.value)" vlaue=1 type="0">Episode placeholder</div>
+                  <div onclick="changeEpisode(this.value)" vlaue=1 type="1">Episode placeholder</div>
+                  <div onclick="changeEpisode(this.value)" vlaue=1 type="0">Episode placeholder</div>
+                </div>
+              </div>
+              <div class="anime-details">
+                <span class="img-poster">Poster</span>
+                <span class="anime-details-obj">
+                  <span>
+                    <h2>Anime Name</h2>
+                    <p>
+                      Anime tags and others : lorem ipsum dolor sit amet.... 
+                      lorem ipsum dolor sit amet....
+                      lorem ipsum dolor sit amet....
+                      lorem ipsum dolor sit amet....
+                    </p>
+                  </span>
+                  <span class="anime-details-obj">
+                    <h4>Anime extras</h4>
+                    <p>
+                      Description : lorem ipsum dolor sit amet.... 
+                      lorem ipsum dolor sit amet....
+                      lorem ipsum dolor sit amet....
+                      lorem ipsum dolor sit amet....
+                    </p>
+                  </span>
+                </span>
+                
+              </div>
+              <div class="app-suggestions">
+                <span class="app-suggestions-obj">
+                  content
+                </span>
+                <span class="app-suggestions-obj">
+                  content
+                </span>
+                <span class="app-suggestions-obj">
+                  content
+                </span>
+                <span class="app-suggestions-obj">
+                  content
+                </span>
+                <span class="app-suggestions-obj">
+                  content
+                </span>
+                <span class="app-suggestions-obj">
+                  content
+                </span>
+                <span class="app-suggestions-obj">
+                  content
+                </span>
+                <span class="app-suggestions-obj">
+                  content
+                </span>
+              </div>
+            </section>
+        </section>
+        <section class="tab" id="app-search">
+            <div>
+                <input type="text" placeholder="Search" onkeydown="searchForQuery(event,this.value)"/>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </section>
+        <section class="default tab" id="app-home">
+            Home screen
+        </section>
+    </main>
+    <div class="desktop">Note that the app is not currently compatible with desktop views.</div>
+    <footer>
+        <section class="app-footer">
+            This website consumes an API.
+        </section>
+    </footer>
+    <script type="text/javascript">
+        const request = new XMLHttpRequest();
+        var search_result=document.getElementById("searchResults");
+        function searchForQuery(event, query) {
+            if (event.key == "Enter") {
+                console.log("searching for "+query);
+
+                request.open('GET', `https://api.consumet.org/anime/gogoanime/${query}?page=1`);
+                request.send();
+
+                request.onload = function() {
+                    if (request.status === 200) {
+                        try {
+                            const response = JSON.parse(request.responseText);
+                            let text = "";
+                            
+                            if (response['results']) {
+                                console.log("total "+response["results"].length+" results.")
+                                for (let i = 0; i < response.results.length; i++) {
+                                    text += JSON.stringify(response["results"][i]["title"]) + "<br>";
+                                }
+                                search_result.innerHTML = text;
+                            } else {
+                                search_result.innerHTML = "No results found.";
+                            }
+                        } catch (error) {
+                            search_result.innerHTML = "Error: Invalid JSON response.";
+                        }
+                    } else {
+                        search_result.innerHTML = "Error: Unable to fetch data.";
+                    }
+                };
+
+                request.onerror = function() {
+                    search_result.innerHTML = "Error: Request failed.";
+                };
+            }
+        }
+
+        function openTab(tabId) {
+            // Hide all tab contents
+            console.log("hi")
+            const tabContents = document.querySelectorAll('.tab');
+            tabContents.forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Show the selected tab content
+            document.getElementById(tabId).style.display = 'grid';
+        }
+    </script>
+</body>
+</html>
